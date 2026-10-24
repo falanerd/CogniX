@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7149884506207964"
-     crossorigin="anonymous"></script>
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5Q5ETQ1232"></script>
   <script>
@@ -32,7 +27,9 @@
         <button class="tipo-teste" data-teste="linguagens"><span class="icone">📚</span><strong>Linguagens</strong><small>Português, interpretação e comunicação</small></button>
         <button class="tipo-teste" data-teste="ingles"><span class="icone">🇬🇧</span><strong>Inglês</strong><small>Vocabulary, grammar, reading e expressions</small></button>
         <button class="tipo-teste" data-teste="semiotica"><span class="icone">👁️</span><strong>Semiótica</strong><small>Signos, símbolos, códigos e interpretação</small></button>
+        <button class="tipo-teste" data-teste="conhecimento-geral"><span class="icone">🌎</span><strong>Conhecimento Geral</strong><small>Ciência, Geografia, Atualidades, e Cultura</small></button>
         <button class="tipo-teste tipo-grupo" data-grupo="engenharias"><span class="icone">⚙️</span><strong>Engenharias</strong><small>Civil, elétrica, mecânica, aeronáutica e aeroespacial</small></button>
+        <button class="tipo-teste tipo-grupo" data-grupo="concurseiro"><span class="icone">📖</span><strong>Concurseiro</strong><small>Questões comentadas para estudar para concursos públicos</small></button>
       </div>
       <p class="aviso">Os testes são recreativos e educacionais. Os resultados representam apenas o desempenho nas questões apresentadas.</p>
     </section>
@@ -48,7 +45,55 @@
         <button class="tipo-engenharia" data-teste="mecanica"><span class="icone">⚙️</span><strong>Engenharia Mecânica</strong><small>Mecânica, termodinâmica, fluidos, materiais e máquinas</small></button>
         <button class="tipo-engenharia" data-teste="aeronautica"><span class="icone">✈️</span><strong>Engenharia Aeronáutica</strong><small>Aerodinâmica, estruturas, propulsão, estabilidade e sistemas</small></button>
         <button class="tipo-engenharia" data-teste="aeroespacial"><span class="icone">🚀</span><strong>Engenharia Aeroespacial</strong><small>Órbitas, foguetes, propulsão, satélites e ambiente espacial</small></button>
+        <button class="tipo-engenharia" data-teste="aeroportuaria"><span class="icone">🛬</span><strong>Engenharia Aeroportuária</strong><small>Pavimentos, pistas, infraestrutura, operações e segurança</small></button>
       </div>
+    </section>
+
+    <section id="concurseiro" class="card tela">
+      <div class="topo-teste"><button id="voltarConcurseiro" class="link-btn" type="button">← Testes</button><span>Concurseiro</span></div>
+      <span class="tag">📖 CONCURSEIRO</span>
+      <h2>Escolha uma disciplina</h2>
+      <p class="subtitulo">Estude com 20 questões de múltipla escolha, ordem aleatória e explicações após cada resposta.</p>
+      <div class="grade-testes">
+        <button class="tipo-engenharia tipo-concurseiro" data-disciplina="direitocivil"><span class="icone">⚖️</span><strong>Direito Civil</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-concurseiro" data-disciplina="direitotrabalhista"><span class="icone">👷</span><strong>Direito Trabalhista</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-concurseiro" data-disciplina="direitoadministrativo"><span class="icone">🏛️</span><strong>Direito Administrativo</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-concurseiro" data-disciplina="direitoconstitucional"><span class="icone">📜</span><strong>Direito Constitucional</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-concurseiro" data-disciplina="tribunais"><span class="icone">🏢</span><strong>Tribunais</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-concurseiro" data-disciplina="portugues"><span class="icone">📚</span><strong>Português</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-concurseiro" data-disciplina="engenhariacivil"><span class="icone">🏗️</span><strong>Engenharia Civil</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-concurseiro" data-disciplina="logica"><span class="icone">🧩</span><strong>Raciocínio Lógico</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-concurseiro" data-disciplina="informatica"><span class="icone">💻</span><strong>Informática</strong><small>20 questões comentadas</small></button>
+      </div>
+      <p class="aviso">Questões autorais para estudo, não extraídas de provas oficiais. Em disciplinas jurídicas, confira eventuais atualizações legislativas.</p>
+    </section>
+
+    <section id="concursoQuestao" class="card tela">
+      <div class="topo-teste"><button id="sairConcurso" class="link-btn" type="button">← Disciplinas</button><span id="concursoContador">Questão 1 de 20</span></div>
+      <span class="tag">📖 ESTUDO COMENTADO</span>
+      <h2 id="concursoTitulo"></h2>
+      <div class="barra"><div id="concursoProgresso"></div></div>
+      <span id="concursoCategoria" class="tag"></span>
+      <h2 id="concursoPergunta"></h2>
+      <div id="concursoAlternativas" class="alternativas"></div>
+      <button id="concursoResponder" class="principal" type="button" disabled>Responder</button>
+      <div id="concursoFeedback" class="concurso-feedback" hidden aria-live="polite">
+        <strong id="concursoStatus"></strong>
+        <p id="concursoCorreta"></p>
+        <p id="concursoExplicacao"></p>
+      </div>
+      <button id="concursoProxima" class="principal" type="button" hidden>Próxima questão →</button>
+    </section>
+
+    <section id="concursoResultado" class="card tela">
+      <span class="tag">📖 RESULTADO DO CONCURSEIRO</span>
+      <h2>Seu desempenho</h2>
+      <p id="concursoResultadoDisciplina" class="subtitulo"></p>
+      <div class="pontuacao"><strong id="concursoPercentual">0%</strong><span id="concursoAcertos">0 de 20 acertos</span></div>
+      <p id="concursoErros" class="mensagem"></p>
+      <p class="aviso">Revise os comentários das questões e tente novamente: a ordem muda a cada tentativa.</p>
+      <button id="concursoRefazer" class="principal secundario" type="button">Refazer disciplina</button>
+      <button id="concursoOutras" class="principal" type="button">Escolher outra disciplina</button>
     </section>
 
     <section id="niveis" class="card tela">
@@ -85,9 +130,18 @@
       <div id="destaqueResultado" class="destaque-resultado"><span class="tag">⭐ SEU DESTAQUE</span><h3 id="destaqueTitulo"></h3><p id="destaqueTexto"></p></div>
       <h3>Desempenho por categoria</h3>
       <div id="categoriasResultado" class="resultado-categorias"></div>
+      <button id="verRespostas" class="principal secundario" type="button">📖 Respostas e explicações</button>
       <button id="refazer" class="principal secundario" type="button">Refazer este nível</button>
       <button id="reiniciar" class="principal" type="button">Escolher outro teste</button>
       <p class="aviso">A pontuação representa apenas o desempenho neste conjunto de questões. No teste cognitivo, ela não corresponde a um valor clínico de QI.</p>
+    </section>
+    <section id="revisao" class="card tela">
+      <div class="topo-teste"><button id="voltarResultado" class="link-btn" type="button">← Resultado</button><span>Revisão do teste</span></div>
+      <span class="tag">📖 RESPOSTAS COMENTADAS</span>
+      <h2>Confira suas respostas</h2>
+      <p class="subtitulo">Veja o que você marcou, a resposta correta e uma explicação rápida de cada questão.</p>
+      <div id="listaRespostas" class="lista-respostas"></div>
+      <button id="voltarResultadoFim" class="principal" type="button">Voltar ao resultado</button>
     </section>
   </main>
   <script src="perguntas/cognitivo.js"></script>
@@ -95,11 +149,23 @@
   <script src="perguntas/linguagens.js"></script>
   <script src="perguntas/ingles.js"></script>
   <script src="perguntas/semiotica.js"></script>
+  <script src="perguntas/conhecimento-geral.js"></script>
   <script src="perguntas/engenharias/civil.js"></script>
   <script src="perguntas/engenharias/eletrica.js"></script>
   <script src="perguntas/engenharias/mecanica.js"></script>
   <script src="perguntas/engenharias/aeronautica.js"></script>
   <script src="perguntas/engenharias/aeroespacial.js"></script>
+  <script src="perguntas/engenharias/aeroportuaria.js"></script>
+  <script src="perguntas/concurseiro/direitocivil.js"></script>
+  <script src="perguntas/concurseiro/direitotrabalhista.js"></script>
+  <script src="perguntas/concurseiro/direitoadministrativo.js"></script>
+  <script src="perguntas/concurseiro/direitoconstitucional.js"></script>
+  <script src="perguntas/concurseiro/tribunais.js"></script>
+  <script src="perguntas/concurseiro/portugues.js"></script>
+  <script src="perguntas/concurseiro/engenhariacivil.js"></script>
+  <script src="perguntas/concurseiro/logica.js"></script>
+  <script src="perguntas/concurseiro/informatica.js"></script>
   <script src="script.js"></script>
+  <script src="concurseiro.js"></script>
 </body>
 </html>

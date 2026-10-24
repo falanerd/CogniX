@@ -5,6 +5,7 @@ let indice = 0;
 let selecionada = null;
 let acertos = 0;
 let stats = {};
+let respostasDadas = [];
 
 const $ = id => document.getElementById(id);
 
@@ -21,11 +22,13 @@ const configuracaoTestes = {
   linguagens: { nome:"Linguagens", tag:"LINGUAGENS", descricao:"Português, interpretação, gramática, vocabulário, coesão e recursos de linguagem." },
   ingles: { nome:"Inglês", tag:"ENGLISH", descricao:"Vocabulary, grammar, reading, expressions, verbs e uso do inglês em contexto." },
   semiotica: { nome:"Semiótica", tag:"SEMIÓTICA", descricao:"Signos, ícones, índices, símbolos, códigos visuais, contexto e construção de sentido." },
+  "conhecimento-geral":{nome:"Conhecimento Geral", tag:"CONHECIMENTO GERAL", descricao: "Desafios de história, geografia, ciência, cultura e atualidades."},
   civil: { nome:"Engenharia Civil", tag:"ENGENHARIA CIVIL", descricao:"Estruturas, materiais, geotecnia, hidráulica, construção, projetos e gestão." },
   eletrica: { nome:"Engenharia Elétrica", tag:"ENGENHARIA ELÉTRICA", descricao:"Circuitos, eletrônica, máquinas elétricas, potência, proteção, energia e controle." },
   mecanica: { nome:"Engenharia Mecânica", tag:"ENGENHARIA MECÂNICA", descricao:"Mecânica, termodinâmica, fluidos, materiais, máquinas, vibrações e transferência de calor." },
   aeronautica: { nome:"Engenharia Aeronáutica", tag:"ENGENHARIA AERONÁUTICA", descricao:"Aerodinâmica, estruturas, propulsão, estabilidade, desempenho, controles e sistemas de aeronaves." },
-  aeroespacial: { nome:"Engenharia Aeroespacial", tag:"ENGENHARIA AEROESPACIAL", descricao:"Dinâmica orbital, lançadores, propulsão, satélites, controle de atitude e ambiente espacial." }
+  aeroespacial: { nome:"Engenharia Aeroespacial", tag:"ENGENHARIA AEROESPACIAL", descricao:"Dinâmica orbital, lançadores, propulsão, satélites, controle de atitude e ambiente espacial." },
+  aeroportuaria:{nome:"Engenharia Aeroportuária", tag:"ENGENHENARIA AEROPORTUÁRIA", descricao:"Desafios sobre pavimentos, pistas, infraestrutura, operações e segurança."}
 };
 
 const mensagensCategorias = {
@@ -81,7 +84,7 @@ function iniciar(faixa) {
   faixaAtual = faixa;
   const banco = window.COGNIX_BANCOS?.[tipoAtual]?.[faixa];
   if (!banco || !banco.length) { alert('Ainda não há perguntas cadastradas para este teste e nível.'); return; }
-  questoes = [...banco]; indice = 0; selecionada = null; acertos = 0; stats = {};
+  questoes = [...banco]; indice = 0; selecionada = null; acertos = 0; stats = {}; respostasDadas = [];
   $('nomeTesteAtual').textContent = configuracaoTestes[tipoAtual].nome;
   $('nomeNivelAtual').textContent = nomesNiveis[faixaAtual];
   tela('teste'); mostrar();
@@ -106,6 +109,7 @@ $('proxima').onclick = () => {
   const q=questoes[indice], cat=q[3];
   if (!stats[cat]) stats[cat]={ok:0,total:0};
   stats[cat].total++;
+  respostasDadas[indice] = selecionada;
   if (selecionada===q[2]) { acertos++; stats[cat].ok++; }
   indice++;
   indice < questoes.length ? mostrar() : resultado();
@@ -141,3 +145,60 @@ $('voltarEngenharias').onclick=()=>tela('home');
 $('reiniciar').onclick=()=>{ tipoAtual=null; faixaAtual=null; tela('home'); };
 $('refazer').onclick=()=>iniciar(faixaAtual);
 $('voltar').onclick=()=>{ if(confirm('Deseja sair do teste? O progresso atual será perdido.')) tela('niveis'); };
+
+
+// Revisão das respostas dos testes tradicionais. O Concurseiro usa sua própria correção.
+function explicarResposta(q) {
+  // Opcionalmente, a quinta posição de cada questão pode conter uma explicação específica.
+  if (typeof q[4] === 'string' && q[4].trim()) return q[4].trim();
+  const enunciado = q[0].trim();
+  const correta = q[1][q[2]];
+  const categoria = q[3] || 'Conhecimento';
+  // Comentários sintéticos para bancos antigos; podem ser substituídos por comentários individuais.
+  if (/^(complete|qual número (vem|segue|completa)|qual (é o )?próximo)/i.test(enunciado) && /[0-9]/.test(enunciado))
+    return `Observe a regularidade ou operação entre os termos do enunciado. A continuação compatível é “${correta}”.`;
+  if (/[+×÷=−%]/.test(enunciado) || /\b(quanto|média|fração|razão|soma|dobro|metade|desconto|aumenta|diminui)\b/i.test(enunciado))
+    return `Aplique as operações e condições numéricas indicadas no enunciado. O resultado correspondente é “${correta}”.`;
+  if (/\b(não pertence|diferente|oposto|antônimo)\b/i.test(enunciado))
+    return `Compare as características ou significados das alternativas. “${correta}” é a opção que atende ao critério pedido.`;
+  if (/\b(concluir|conclusão|premissa|implica|necessariamente|todos|nenhum|alguns)\b/i.test(enunciado))
+    return `Considere apenas o que decorre logicamente das premissas, sem acrescentar hipóteses. A conclusão adequada é “${correta}”.`;
+  return `Na categoria ${categoria}, a alternativa “${correta}” é a resposta esperada para o conceito apresentado no enunciado. Consulte o conteúdo da disciplina para aprofundar a justificativa.`;
+}
+
+function abrirRevisao() {
+  const lista = $('listaRespostas');
+  lista.replaceChildren();
+  questoes.forEach((q, i) => {
+    const marcada = respostasDadas[i];
+    const correta = q[2];
+    const acertou = marcada === correta;
+    const artigo = document.createElement('article');
+    artigo.className = 'item-revisao';
+    const cabecalho = document.createElement('div');
+    cabecalho.className = 'cabecalho-revisao';
+    const numero = document.createElement('strong');
+    numero.textContent = `Questão ${i + 1}`;
+    const estado = document.createElement('span');
+    estado.className = acertou ? 'estado-revisao acertou' : 'estado-revisao errou';
+    estado.textContent = acertou ? '✓ Acertou' : '✕ Errou';
+    cabecalho.append(numero, estado);
+    const titulo = document.createElement('p');
+    titulo.className = 'enunciado-revisao';
+    titulo.textContent = q[0];
+    const sua = document.createElement('p');
+    sua.textContent = `Sua resposta: ${marcada === undefined ? 'Não respondida' : String.fromCharCode(65 + marcada) + ') ' + q[1][marcada]}`;
+    const certa = document.createElement('p');
+    certa.className = 'resposta-certa-revisao';
+    certa.textContent = `Resposta correta: ${String.fromCharCode(65 + correta)}) ${q[1][correta]}`;
+    const explicacao = document.createElement('p');
+    explicacao.className = 'explicacao-revisao';
+    explicacao.textContent = `Explicação: ${explicarResposta(q)}`;
+    artigo.append(cabecalho, titulo, sua, certa, explicacao);
+    lista.appendChild(artigo);
+  });
+  tela('revisao');
+}
+$('verRespostas').onclick = abrirRevisao;
+$('voltarResultado').onclick = () => tela('resultado');
+$('voltarResultadoFim').onclick = () => tela('resultado');
