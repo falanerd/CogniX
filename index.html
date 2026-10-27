@@ -51,6 +51,7 @@
         <button class="tipo-teste" data-teste="semiotica"><span class="icone">👁️</span><strong>Semiótica</strong><small>Signos, símbolos, códigos e interpretação</small></button>
         <button class="tipo-teste" data-teste="conhecimento-geral"><span class="icone">🌎</span><strong>Conhecimento Geral</strong><small>Ciência, Geografia, Atualidades, e Cultura</small></button>
         <button class="tipo-teste tipo-grupo" data-grupo="engenharias"><span class="icone">⚙️</span><strong>Engenharias</strong><small>Civil, elétrica, mecânica, aeronáutica e aeroespacial</small></button>
+        <button class="tipo-teste tipo-grupo" data-grupo="enem"><span class="icone">🎓</span><strong>ENEM</strong><small>9 disciplinas com questões comentadas</small></button>
         <button class="tipo-teste tipo-grupo" data-grupo="concurseiro"><span class="icone">📖</span><strong>Concurseiro</strong><small>Questões comentadas para concursos públicos</small></button>
       </div>
       <p class="aviso">Os testes são recreativos e educacionais. Os resultados representam apenas o desempenho nas questões apresentadas.</p>
@@ -69,6 +70,53 @@
         <button class="tipo-engenharia" data-teste="aeroespacial"><span class="icone">🚀</span><strong>Engenharia Aeroespacial</strong><small>Órbitas, foguetes, propulsão, satélites e ambiente espacial</small></button>
         <button class="tipo-engenharia" data-teste="aeroportuaria"><span class="icone">🛬</span><strong>Engenharia Aeroportuária</strong><small>Pavimentos, pistas, infraestrutura, operações e segurança</small></button>
       </div>
+    </section>
+
+    <section id="enem" class="card tela">
+      <div class="topo-teste"><button id="voltarEnem" class="link-btn" type="button">← Testes</button><span>ENEM</span></div>
+      <span class="tag">🎓 ENEM</span>
+      <h2>Escolha uma disciplina</h2>
+      <p class="subtitulo">20 questões aleatórias por disciplina, cinco alternativas e explicação após cada resposta. Matemática mistura conteúdos de cinco áreas.</p>
+      <div class="grade-testes">
+        <button class="tipo-engenharia tipo-enem" data-disciplina="portugues"><span class="icone">📚</span><strong>Português</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-enem" data-disciplina="ingles"><span class="icone">🇬🇧</span><strong>Inglês</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-enem" data-disciplina="matematica"><span class="icone">➗</span><strong>Matemática</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-enem" data-disciplina="quimica"><span class="icone">⚗️</span><strong>Química</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-enem" data-disciplina="fisica"><span class="icone">⚡</span><strong>Física</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-enem" data-disciplina="biologia"><span class="icone">🧬</span><strong>Biologia</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-enem" data-disciplina="historia"><span class="icone">🏛️</span><strong>História</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-enem" data-disciplina="geografia"><span class="icone">🌎</span><strong>Geografia</strong><small>20 questões comentadas</small></button>
+        <button class="tipo-engenharia tipo-enem" data-disciplina="literatura"><span class="icone">📖</span><strong>Literatura</strong><small>20 questões comentadas</small></button>
+      </div>
+      <p class="aviso">Questões autorais de preparação, não extraídas de provas oficiais do ENEM. A classificação de dificuldade é indicativa.</p>
+    </section>
+
+    <section id="enemQuestao" class="card tela">
+      <div class="topo-teste"><button id="sairEnem" class="link-btn" type="button">← Disciplinas</button><span id="enemContador">Questão 1 de 20</span></div>
+      <span class="tag">🎓 ENEM • ESTUDO COMENTADO</span>
+      <h2 id="enemTitulo"></h2>
+      <div class="barra"><div id="enemProgresso"></div></div>
+      <div class="enem-metadados"><span id="enemCategoria" class="tag"></span><span id="enemDificuldade" class="tag" aria-label="Dificuldade"></span></div>
+      <h2 id="enemPergunta"></h2>
+      <div id="enemAlternativas" class="alternativas"></div>
+      <button id="enemResponder" class="principal" type="button" disabled>Responder</button>
+      <div id="enemFeedback" class="concurso-feedback" hidden aria-live="polite">
+        <strong id="enemStatus"></strong>
+        <p id="enemCorreta"></p>
+        <p id="enemExplicacao"></p>
+      </div>
+      <button id="enemProxima" class="principal" type="button" hidden>Próxima questão →</button>
+    </section>
+
+    <section id="enemResultado" class="card tela">
+      <span class="tag">🎓 RESULTADO DO ENEM</span>
+      <h2>Seu desempenho</h2>
+      <p id="enemResultadoDisciplina" class="subtitulo"></p>
+      <div class="pontuacao"><strong id="enemPercentual">0%</strong><span id="enemAcertos">0 de 20 acertos</span></div>
+      <p id="enemErros" class="mensagem"></p>
+      <p class="aviso">Revise as explicações e tente novamente. A ordem das questões muda a cada tentativa.</p>
+      <button id="enemRefazer" class="principal secundario" type="button">Refazer disciplina</button>
+      <button id="enemOutras" class="principal" type="button">Escolher outra disciplina</button>
     </section>
 
     <section id="concurseiro" class="card tela">
@@ -223,7 +271,17 @@
   <script src="perguntas/concurseiro/engenhariacivil.js"></script>
   <script src="perguntas/concurseiro/logica.js"></script>
   <script src="perguntas/concurseiro/informatica.js"></script>
+  <script src="perguntas/enem/portugues.js"></script>
+  <script src="perguntas/enem/ingles.js"></script>
+  <script src="perguntas/enem/matematica.js"></script>
+  <script src="perguntas/enem/quimica.js"></script>
+  <script src="perguntas/enem/fisica.js"></script>
+  <script src="perguntas/enem/biologia.js"></script>
+  <script src="perguntas/enem/historia.js"></script>
+  <script src="perguntas/enem/geografia.js"></script>
+  <script src="perguntas/enem/literatura.js"></script>
   <script src="script.js"></script>
   <script src="concurseiro.js"></script>
+  <script src="enem.js"></script>
 </body>
 </html>
