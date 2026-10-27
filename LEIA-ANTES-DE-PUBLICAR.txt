@@ -1,0 +1,14 @@
+COGNIX — PROTÓTIPO DE CONSENTIMENTO (TESTE LOCAL)
+
+Arquivos: index.html, cookies.js, cookies.css.
+Copie estes três arquivos para a CÓPIA local do CogniX, mantendo style.css, script.js, concurseiro.js e a pasta perguntas/ intactos.
+
+TESTE:
+1. Rode um servidor local (python -m http.server 8001) e abra http://localhost:8001.
+2. Confira os testes e Concurseiro, inclusive resultado e revisão.
+3. Veja o banner, teste Recusar, Aceitar e Personalizar.
+4. Clique em Preferências de cookies no rodapé para mudar a escolha.
+5. Para simular primeira visita, no console do navegador rode localStorage.removeItem('cognix_consent_v1') e atualize.
+
+ATENÇÃO: NÃO PUBLIQUE EM PRODUÇÃO AINDA.
+A mensagem europeia do Google AdSense foi publicada separadamente. A detecção da CMP por __tcfapi é uma proteção preliminar, NÃO uma garantia de ausência de conflito por país. Antes do commit, é necessário validar comportamento regional, tags, consentimento e política de privacidade. Consent Mode em modo avançado ainda pode transmitir pings sem cookies sob consentimento negado; para bloqueio total de tags, é necessário modo básico/condicional. A recusa de publicidade opcional não significa necessariamente ausência de anúncios contextuais.

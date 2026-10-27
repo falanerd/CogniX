@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5Q5ETQ1232"></script>
+  <!-- Consent Mode v2: padrão negado antes das tags Google -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', false);
+  </script>
+  <!-- Preferências previamente salvas: aplicadas antes das tags -->
+  <script src="cookies.js"></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5Q5ETQ1232"></script>
+  <script>
     gtag('js', new Date());
     gtag('config', 'G-5Q5ETQ1232');
   </script>
 
-  <!-- Google AdSense -->
+  <!-- Google AdSense (também necessário para a CMP europeia do Google) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7149884506207964" crossorigin="anonymous"></script>
 
   <meta charset="UTF-8">
@@ -18,6 +35,7 @@
   <meta name="theme-color" content="#111827">
   <title>CogniX | Testes e desafios</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cookies.css">
 </head>
 <body>
   <main class="app">
@@ -154,9 +172,35 @@
     <nav class="links-rodape" aria-label="Informações institucionais">
       <a href="privacidade.html">Política de Privacidade</a> |
       <a href="sobre.html">Sobre</a> |
-      <a href="contato.html">Contato</a>
+      <a href="contato.html">Contato</a> |
+      <button id="abrirPreferenciasCookies" class="cookies-link" type="button">Preferências de cookies</button>
     </nav>
   </footer>
+
+  <!-- Banner independente dos testes; preferência armazenada apenas no navegador -->
+  <section id="cookiesBanner" class="cookies-banner" role="dialog" aria-modal="false" aria-labelledby="cookiesTitulo" hidden>
+    <div class="cookies-conteudo">
+      <h2 id="cookiesTitulo">Sua privacidade no CogniX</h2>
+      <p>Usamos tecnologias do Google para medir visitas e, quando permitido, exibir publicidade. Você pode aceitar, recusar ou escolher as finalidades opcionais. Suas respostas aos testes não são armazenadas. <a href="privacidade.html">Política de Privacidade</a>.</p>
+      <div class="cookies-acoes">
+        <button id="cookiesRecusar" type="button">Recusar opcionais</button>
+        <button id="cookiesPersonalizar" type="button">Personalizar</button>
+        <button id="cookiesAceitar" type="button">Aceitar todos</button>
+      </div>
+    </div>
+  </section>
+  <section id="cookiesPainel" class="cookies-painel" role="dialog" aria-modal="true" aria-labelledby="cookiesPainelTitulo" hidden>
+    <div class="cookies-janela">
+      <h2 id="cookiesPainelTitulo">Preferências de privacidade</h2>
+      <p>Os cookies essenciais à escolha de privacidade ficam ativos. As opções abaixo são facultativas.</p>
+      <label><input id="cookiesAnalytics" type="checkbox"> <span><strong>Medição de audiência</strong><small>Google Analytics para estatísticas de navegação.</small></span></label>
+      <label><input id="cookiesAds" type="checkbox"> <span><strong>Publicidade</strong><small>Armazenamento e utilização de dados para anúncios do Google.</small></span></label>
+      <div class="cookies-acoes">
+        <button id="cookiesCancelar" type="button">Cancelar</button>
+        <button id="cookiesSalvar" type="button">Salvar escolhas</button>
+      </div>
+    </div>
+  </section>
 
   <script src="perguntas/cognitivo.js"></script>
   <script src="perguntas/matematica.js"></script>

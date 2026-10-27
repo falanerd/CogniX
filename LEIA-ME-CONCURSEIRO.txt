@@ -1,0 +1,21 @@
+COGNIX — MODALIDADE CONCURSEIRO
+
+1. Abra index.html no navegador ou execute python -m http.server 8001 na pasta do projeto.
+2. Clique em Concurseiro e escolha uma disciplina.
+3. Cada disciplina possui 20 questões autorais comentadas. A ordem é embaralhada a cada tentativa.
+4. Após selecionar uma alternativa, clique em Responder. Leia a explicação e avance.
+
+COMO ACRESCENTAR UMA QUESTÃO
+Abra perguntas/concurseiro/NOMEDADISCIPLINA.js e localize o array de objetos.
+Antes do colchete final ], adicione outro objeto, separado do anterior por vírgula:
+{
+  "enunciado": "Sua pergunta?",
+  "alternativas": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D"],
+  "correta": 1,
+  "explicacao": "Por que a alternativa B é correta, com fundamento ou cálculo.",
+  "categoria": "Tema da questão"
+}
+O campo correta usa índice de 0 a 3: A=0, B=1, C=2, D=3.
+A quantidade de questões é calculada automaticamente; não é preciso mudar o JavaScript principal.
+
+ATENÇÃO: Questões autorais, não oficiais. Conteúdo jurídico deve ser revisado conforme legislação e jurisprudência vigentes.

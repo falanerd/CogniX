@@ -1,0 +1,20 @@
+/* Componentes isolados para não alterar o visual dos testes */
+.cookies-banner[hidden], .cookies-painel[hidden] { display: none !important; }
+.cookies-banner, .cookies-painel { box-sizing: border-box; font-family: Arial, sans-serif; color: #182338; }
+.cookies-banner *, .cookies-painel * { box-sizing: border-box; }
+.cookies-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99990; background: #fff; border-top: 1px solid #d5dce7; box-shadow: 0 -5px 25px #0002; padding: 16px; }
+.cookies-conteudo { max-width: 980px; margin: auto; }
+.cookies-banner h2, .cookies-painel h2 { font-size: 19px; margin: 0 0 8px; color: #152238; }
+.cookies-banner p, .cookies-painel p { font-size: 14px; line-height: 1.5; margin: 0 0 12px; }
+.cookies-banner a { color: #175cc4; }
+.cookies-acoes { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+.cookies-acoes button { cursor: pointer; background: #fff; color: #164b9d; border: 1px solid #9db7dc; border-radius: 7px; padding: 10px 16px; font-size: 14px; font-weight: 600; }
+.cookies-acoes button:last-child { background: #165fc4; color: #fff; border-color: #165fc4; }
+.cookies-painel { position: fixed; inset: 0; z-index: 99991; background: #0009; display: flex; align-items: center; justify-content: center; padding: 15px; }
+.cookies-janela { background: #fff; border-radius: 12px; padding: 22px; max-width: 540px; width: 100%; max-height: 90vh; overflow-y: auto; }
+.cookies-janela label { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-top: 1px solid #e5e9ef; font-size: 15px; }
+.cookies-janela input { width: 18px; height: 18px; flex: none; }
+.cookies-janela label span { display: grid; gap: 5px; }
+.cookies-janela small { color: #5d6573; line-height: 1.4; }
+.cookies-link { background: none; border: 0; color: inherit; text-decoration: underline; cursor: pointer; font: inherit; padding: 0; }
+@media (max-width: 600px) { .cookies-acoes { justify-content: stretch; } .cookies-acoes button { flex: 1 1 100%; } }

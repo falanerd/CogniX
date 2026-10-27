@@ -1,0 +1,15 @@
+COGNIX — RESPOSTAS AO FINAL DOS TESTES
+
+Depois de terminar qualquer teste tradicional, clique em "Respostas e explicações".
+A revisão mostra a resposta marcada, o gabarito e um comentário curto para cada questão.
+O Concurseiro continua com correção imediata, sem alterações.
+
+COMO ESCREVER UMA EXPLICAÇÃO ESPECÍFICA
+Os bancos antigos têm quatro campos por questão:
+["Pergunta", ["A", "B", "C", "D"], 1, "Categoria"]
+
+Você pode acrescentar um QUINTO campo com a explicação:
+["Qual é a capital do Brasil?", ["Rio", "Brasília", "São Paulo", "Belém"], 1, "Geografia", "Brasília é a capital federal desde 1960."]
+
+Se não houver o quinto campo, o site exibe um comentário automático resumido.
+Para uma revisão pedagógica mais completa, escreva o quinto campo de cada questão.
